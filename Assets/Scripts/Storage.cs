@@ -4,6 +4,9 @@ using System.Collections;
 public class Storage : MonoBehaviour {
 	private const string KEY_MONEY = "PLAYER_MONEY";
 	private const string NUM_SESSION = "NUM_SESSION"; 
+
+
+
 	// Use this for initialization
 	void Start () {
 	
@@ -14,21 +17,21 @@ public class Storage : MonoBehaviour {
 	
 	}
 
-	public void SetMoney(int money){
+	public static void SetMoney(int money){
 		PlayerPrefs.SetInt (KEY_MONEY, money);
 	}
 
-	public int GetMoney(){
+	public static int GetMoney(){
 		return PlayerPrefs.GetInt (KEY_MONEY);
 	}
 
-	public void IncNumSession(){
+	public static void IncNumSession(){
 		var num = GetNumSession ();
 		num++;
 		PlayerPrefs.SetInt (NUM_SESSION, num);
 	}
 
-	public int GetNumSession(){
+	public static int GetNumSession(){
 		return PlayerPrefs.GetInt (NUM_SESSION);
 	}
 }
