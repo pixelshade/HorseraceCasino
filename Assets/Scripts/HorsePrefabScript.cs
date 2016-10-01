@@ -21,13 +21,9 @@ public class HorsePrefabScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+		Move();    
 	}
 
-    void FixedUpdate()
-    {
-        Move();
-    }
 
     private void Move()
     {
@@ -36,6 +32,8 @@ public class HorsePrefabScript : MonoBehaviour {
             horse.GetPos();
         }
     }
+
+
 
     public void SetHorse(Horse horse)
     {
