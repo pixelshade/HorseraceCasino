@@ -25,8 +25,8 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 {
 	// Unity IAP objects 
 	private IStoreController m_Controller;
-	private IAppleExtensions m_AppleExtensions;
-	private ISamsungAppsExtensions m_SamsungExtensions;
+//	private IAppleExtensions m_AppleExtensions;
+//	private ISamsungAppsExtensions m_SamsungExtensions;
 
 	private int m_SelectedItemIndex = -1; // -1 == no product
 	private bool m_PurchaseInProgress;
@@ -44,14 +44,14 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 	public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
 	{
 		m_Controller = controller;
-		m_AppleExtensions = extensions.GetExtension<IAppleExtensions> ();
-		m_SamsungExtensions = extensions.GetExtension<ISamsungAppsExtensions> ();
+//		m_AppleExtensions = extensions.GetExtension<IAppleExtensions> ();
+//		m_SamsungExtensions = extensions.GetExtension<ISamsungAppsExtensions> ();
 
 		InitUI(controller.products.all);
 
 		// On Apple platforms we need to handle deferred purchases caused by Apple's Ask to Buy feature.
 		// On non-Apple platforms this will have no effect; OnDeferred will never be called.
-		m_AppleExtensions.RegisterPurchaseDeferredListener(OnDeferred);
+//		m_AppleExtensions.RegisterPurchaseDeferredListener(OnDeferred);
 
 		Debug.Log("Available items:");
 		foreach (var item in controller.products.all)
@@ -201,6 +201,7 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 		{
 			{"100.gold.coins.mac", MacAppStore.Name},
 			{"000000596586", TizenStore.Name},
+		
 
 		});
 
@@ -225,21 +226,21 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 
 		// Write Amazon's JSON description of our products to storage when using Amazon's local sandbox.
 		// This should be removed from a production build.
-		builder.Configure<IAmazonConfiguration>().WriteSandboxJSON(builder.products);
+//		builder.Configure<IAmazonConfiguration>().WriteSandboxJSON(builder.products);
 
 		// This enables simulated purchase success for Samsung IAP.
 		// You would remove this, or set to SamsungAppsMode.Production, before building your release package.
-		builder.Configure<ISamsungAppsConfiguration>().SetMode(SamsungAppsMode.AlwaysSucceed);
+//		builder.Configure<ISamsungAppsConfiguration>().SetMode(SamsungAppsMode.AlwaysSucceed);
 		// This records whether we are using Samsung IAP. Currently ISamsungAppsExtensions.RestoreTransactions
 		// displays a blocking Android Activity, so: 
 		// A) Unity IAP does not automatically restore purchases on Samsung Galaxy Apps
 		// B) IAPDemo (this) displays the "Restore" GUI button for Samsung Galaxy Apps
-		m_IsSamsungAppsStoreSelected = module.androidStore == AndroidStore.SamsungApps;
+//		m_IsSamsungAppsStoreSelected = module.androidStore == AndroidStore.SamsungApps;
 
 
 		// This selects the GroupId that was created in the Tizen Store for this set of products
 		// An empty or non-matching GroupId here will result in no products available for purchase
-		builder.Configure<ITizenStoreConfiguration>().SetGroupId("100000085616");
+//		builder.Configure<ITizenStoreConfiguration>().SetGroupId("100000085616");
 
 
 		#if RECEIPT_VALIDATION
@@ -321,14 +322,14 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 		{
 			GetRestoreButton().onClick.AddListener(() =>
 			{ 
-				if (m_IsSamsungAppsStoreSelected)
-				{
-					m_SamsungExtensions.RestoreTransactions(OnTransactionsRestored);
-				}
-				else
-				{
-					m_AppleExtensions.RestoreTransactions(OnTransactionsRestored);
-				}
+//				if (m_IsSamsungAppsStoreSelected)
+//				{
+//					m_SamsungExtensions.RestoreTransactions(OnTransactionsRestored);
+//				}
+//				else
+//				{
+//					m_AppleExtensions.RestoreTransactions(OnTransactionsRestored);
+//				}
 			});
 		}
 	}
